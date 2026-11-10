@@ -1,0 +1,244 @@
+/* 外框：木頭牌桌邊，上面有一圈跑馬燈 */
+.mj-frame {
+  position: relative;
+  padding: 26px;
+  border-radius: 28px;
+  background: linear-gradient(145deg, #9a5e2c 0%, #6b3f1d 50%, #4a2a12 100%);
+  box-shadow:
+    inset 0 0 0 3px #c08a4a,
+    inset 0 0 0 6px #4a2a12,
+    0 20px 40px rgba(0, 0, 0, 0.55);
+}
+
+/* 跑馬燈燈泡，奇偶交錯閃爍 */
+.mj-bulb {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  margin: -5px 0 0 -5px;
+  border-radius: 9999px;
+  background: #fde68a;
+  box-shadow: 0 0 8px 2px rgba(253, 230, 138, 0.9);
+  animation: mj-blink 0.8s steps(1, end) infinite;
+}
+
+.mj-bulbAlt {
+  animation-delay: 0.4s;
+}
+
+.mj-fast {
+  animation-duration: 0.25s;
+}
+
+.mj-fast.mj-bulbAlt {
+  animation-delay: 0.125s;
+}
+
+@keyframes mj-blink {
+  0% {
+    background: #fde68a;
+    box-shadow: 0 0 8px 2px rgba(253, 230, 138, 0.9);
+  }
+  50% {
+    background: #b45309;
+    box-shadow: none;
+  }
+}
+
+/* 牌桌：綠色絨布 */
+.mj-table {
+  border-radius: 16px;
+  background: radial-gradient(
+    ellipse at 50% 40%,
+    #23855a 0%,
+    #176840 55%,
+    #0e4a2c 100%
+  );
+  box-shadow: inset 0 0 30px rgba(0, 0, 0, 0.5);
+}
+
+/* 麻將牌正面：象牙白牌面 + 下方綠色牌背厚度 */
+.mj-tile {
+  position: relative;
+  background: linear-gradient(180deg, #fffdf6 0%, #f4ead1 100%);
+  border-radius: 12px;
+  box-shadow:
+    inset 0 -4px 0 rgba(0, 0, 0, 0.06),
+    0 3px 0 #e6d8b8,
+    0 10px 0 #1f7a4d,
+    0 12px 0 #13573a,
+    0 16px 16px rgba(0, 0, 0, 0.45);
+  transition:
+    transform 80ms ease-out,
+    box-shadow 80ms ease-out;
+}
+
+/* 沒有名字的格子：蓋牌（牌背朝上） */
+.mj-back {
+  background: linear-gradient(180deg, #34a96b 0%, #1f7a4d 100%);
+  box-shadow:
+    inset 0 0 0 4px rgba(255, 255, 255, 0.15),
+    0 3px 0 #f4ead1,
+    0 10px 0 #e6d8b8,
+    0 16px 16px rgba(0, 0, 0, 0.45);
+}
+
+/* 跑燈經過的牌：抬起 + 金色光暈 */
+.mj-active {
+  transform: translateY(-8px);
+  box-shadow:
+    0 0 0 4px #fbbf24,
+    0 0 28px 8px rgba(251, 191, 36, 0.75),
+    0 3px 0 #e6d8b8,
+    0 10px 0 #1f7a4d,
+    0 12px 0 #13573a,
+    0 20px 20px rgba(0, 0, 0, 0.5);
+}
+
+/* 中獎的牌：持續閃爍 */
+.mj-winner {
+  animation: mj-win 0.9s ease-in-out infinite alternate;
+}
+
+@keyframes mj-win {
+  from {
+    box-shadow:
+      0 0 0 4px #fbbf24,
+      0 0 18px 4px rgba(251, 191, 36, 0.6),
+      0 10px 0 #1f7a4d,
+      0 20px 20px rgba(0, 0, 0, 0.5);
+  }
+  to {
+    box-shadow:
+      0 0 0 6px #f87171,
+      0 0 40px 14px rgba(248, 113, 113, 0.85),
+      0 10px 0 #1f7a4d,
+      0 20px 20px rgba(0, 0, 0, 0.5);
+  }
+}
+
+/* 中間的「立即抽獎」紅色大按鈕 */
+.mj-center {
+  cursor: pointer;
+  border-radius: 14px;
+  background: linear-gradient(180deg, #f87171 0%, #dc2626 45%, #b91c1c 100%);
+  box-shadow:
+    inset 0 2px 0 rgba(255, 255, 255, 0.45),
+    inset 0 -4px 0 rgba(0, 0, 0, 0.15),
+    0 8px 0 #7f1d1d,
+    0 14px 16px rgba(0, 0, 0, 0.45);
+  transition:
+    transform 80ms ease-out,
+    box-shadow 80ms ease-out;
+}
+
+.mj-center:not(:disabled):hover {
+  transform: translateY(-4px);
+}
+
+.mj-center:not(:disabled):active {
+  transform: translateY(6px);
+  box-shadow:
+    inset 0 2px 0 rgba(255, 255, 255, 0.45),
+    0 2px 0 #7f1d1d,
+    0 6px 8px rgba(0, 0, 0, 0.45);
+}
+
+.mj-center:disabled {
+  cursor: not-allowed;
+}
+
+.mj-vertical {
+  writing-mode: vertical-rl;
+  letter-spacing: 0.15em;
+}
+
+/* 荷官：左右扭擺 */
+.mj-dealer {
+  transform-origin: 50% 100%;
+  animation: mj-sway 3.2s ease-in-out infinite;
+}
+
+/* 抽獎中：扭得更快 */
+.mj-dealer-busy {
+  animation-duration: 1s;
+}
+
+/* 以腳為支點左右扭擺 */
+@keyframes mj-sway {
+  0%,
+  100% {
+    transform: rotate(-2deg) translateY(0);
+  }
+  25% {
+    transform: rotate(0deg) translateY(-5px);
+  }
+  50% {
+    transform: rotate(2deg) translateY(0);
+  }
+  75% {
+    transform: rotate(0deg) translateY(-5px);
+  }
+}
+
+/* 荷官對話框 */
+.mj-bubble {
+  position: relative;
+  border-radius: 16px;
+  background: #fffdf6;
+  color: #7c2d12;
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.35);
+}
+
+.mj-bubble::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: -10px;
+  margin-left: -10px;
+  border: 10px solid transparent;
+  border-bottom: 0;
+  border-top-color: #fffdf6;
+}
+
+/* 荷官去背人像：無邊框，底部漸淡融入背景 */
+.mj-dealer-card {
+  filter: drop-shadow(0 10px 18px rgba(0, 0, 0, 0.6));
+  -webkit-mask-image: linear-gradient(180deg, #000 82%, transparent 100%);
+  mask-image: linear-gradient(180deg, #000 82%, transparent 100%);
+  transition: transform 300ms ease-out;
+}
+
+/* 開獎時：放大一點並發出金光 */
+.mj-dealer-win {
+  transform: scale(1.05);
+  animation: mj-dealer-glow 0.9s ease-in-out infinite alternate;
+}
+
+@keyframes mj-dealer-glow {
+  from {
+    filter: drop-shadow(0 0 6px rgba(251, 191, 36, 0.5));
+  }
+  to {
+    filter: drop-shadow(0 0 22px rgba(251, 191, 36, 0.95));
+  }
+}
+
+/* 荷官身旁的閃光星芒 */
+.mj-twinkle {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: mj-twinkle 2.4s ease-in-out infinite;
+}
+
+@keyframes mj-twinkle {
+  0%,
+  100% {
+    opacity: 0;
+    transform: scale(0.3) rotate(0deg);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1) rotate(45deg);
+  }
+}

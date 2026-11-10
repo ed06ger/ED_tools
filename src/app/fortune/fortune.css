@@ -1,0 +1,167 @@
+/* 好運抽籤頁面樣式（一般 CSS，以 fx- 為前綴避免衝突） */
+
+/* 廟宇風背景：深紅 + 細緻格紋 */
+.fx-bg {
+  background-color: #5c0f12;
+  background-image:
+    radial-gradient(
+      ellipse at 50% 0%,
+      rgba(251, 191, 36, 0.18),
+      transparent 60%
+    ),
+    repeating-linear-gradient(
+      45deg,
+      rgba(0, 0, 0, 0.06) 0 2px,
+      transparent 2px 14px
+    ),
+    repeating-linear-gradient(
+      -45deg,
+      rgba(0, 0, 0, 0.06) 0 2px,
+      transparent 2px 14px
+    );
+}
+
+/* 金色邊框卡片 */
+.fx-card {
+  border: 2px solid #d4a017;
+  border-radius: 18px;
+  background: rgba(40, 6, 8, 0.55);
+  box-shadow:
+    inset 0 0 0 4px rgba(212, 160, 23, 0.2),
+    0 12px 30px rgba(0, 0, 0, 0.4);
+}
+
+/* 籤筒 */
+.fx-tube {
+  position: relative;
+  width: 120px;
+  height: 170px;
+  border-radius: 14px 14px 22px 22px;
+  background: linear-gradient(
+    90deg,
+    #7f1d1d 0%,
+    #dc2626 35%,
+    #ef4444 50%,
+    #b91c1c 70%,
+    #7f1d1d 100%
+  );
+  box-shadow:
+    inset 0 -10px 0 rgba(0, 0, 0, 0.2),
+    0 14px 24px rgba(0, 0, 0, 0.5);
+  transform-origin: 50% 100%;
+}
+
+.fx-tube::before,
+.fx-tube::after {
+  content: "";
+  position: absolute;
+  left: -4px;
+  right: -4px;
+  height: 12px;
+  border-radius: 6px;
+  background: linear-gradient(180deg, #fde68a, #d4a017);
+}
+
+.fx-tube::before {
+  top: 18px;
+}
+
+.fx-tube::after {
+  bottom: 24px;
+}
+
+/* 籤筒裡的竹籤 */
+.fx-stick {
+  position: absolute;
+  bottom: 84%;
+  width: 8px;
+  height: 90px;
+  border-radius: 3px 3px 0 0;
+  background: linear-gradient(90deg, #d6a85c, #f3d9a4, #c08a3e);
+  transform-origin: 50% 100%;
+}
+
+.fx-stick-top {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 14px;
+  border-radius: 3px 3px 0 0;
+  background: #b91c1c;
+}
+
+/* 搖籤動畫 */
+.fx-shake {
+  animation: fx-shake 0.18s ease-in-out infinite alternate;
+}
+
+@keyframes fx-shake {
+  from {
+    transform: rotate(-12deg);
+  }
+  to {
+    transform: rotate(12deg);
+  }
+}
+
+/* 抽出的那支籤往上飛出 */
+.fx-pop {
+  animation: fx-pop 0.6s cubic-bezier(0.2, 1.4, 0.4, 1) forwards;
+}
+
+@keyframes fx-pop {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(-70px) rotate(-6deg);
+  }
+}
+
+/* 籤紙展開 */
+.fx-unfold {
+  animation: fx-unfold 0.7s ease-out both;
+  transform-origin: 50% 0;
+}
+
+@keyframes fx-unfold {
+  from {
+    opacity: 0;
+    transform: scaleY(0.2) translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: scaleY(1) translateY(0);
+  }
+}
+
+.fx-fade {
+  animation: fx-fade 0.6s ease-out both;
+}
+
+@keyframes fx-fade {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* 籤紙：米色和紙 + 紅框 */
+.fx-slip {
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.4), transparent 30%), #f8edd3;
+  color: #3b0d0d;
+  border: 3px double #b91c1c;
+  border-radius: 6px;
+  box-shadow: 0 16px 30px rgba(0, 0, 0, 0.45);
+}
+
+.fx-vertical {
+  writing-mode: vertical-rl;
+  text-orientation: upright;
+}

@@ -1,0 +1,400 @@
+/* 首頁（ED的小工具箱）樣式：一般 CSS，以 ed- 為前綴 */
+
+/* 和紙底：米色 + 細緻纖維雜訊 */
+.ed-paper {
+  background-color: #f6f0e4;
+  background-image:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.42 0 0 0 0 0.33 0 0 0 0 0.18 0 0 0 0.09 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"),
+    radial-gradient(
+      ellipse at 80% 0%,
+      rgba(200, 64, 45, 0.07),
+      transparent 55%
+    ),
+    radial-gradient(
+      ellipse at 0% 60%,
+      rgba(184, 146, 58, 0.08),
+      transparent 50%
+    );
+}
+
+.ed-en {
+  font-family: var(--font-ed-en), "Times New Roman", serif;
+  font-style: italic;
+}
+
+.ed-vertical {
+  writing-mode: vertical-rl;
+}
+
+/* ---------- Header ---------- */
+.ed-header {
+  background: rgba(246, 240, 228, 0.88);
+  backdrop-filter: blur(10px) saturate(1.2);
+  -webkit-backdrop-filter: blur(10px) saturate(1.2);
+  border-bottom: 1px solid rgba(184, 146, 58, 0.45);
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.6);
+}
+
+.ed-navlink {
+  position: relative;
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.5rem;
+  padding: 0.5rem 0.9rem;
+  font-size: 0.95rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  color: #2c2620;
+  transition: color 0.25s;
+}
+
+.ed-navlink::after {
+  content: "";
+  position: absolute;
+  left: 0.9rem;
+  right: 0.9rem;
+  bottom: 0.2rem;
+  height: 2px;
+  background: #c8402d;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.3s ease;
+}
+
+.ed-navlink:hover {
+  color: #c8402d;
+}
+
+.ed-navlink:hover::after {
+  transform: scaleX(1);
+}
+
+/* 手機折疊選單 */
+.ed-menu > summary {
+  list-style: none;
+}
+
+.ed-menu > summary::-webkit-details-marker {
+  display: none;
+}
+
+.ed-burger,
+.ed-burger::before,
+.ed-burger::after {
+  display: block;
+  width: 22px;
+  height: 2px;
+  background: #1d1a17;
+  transition:
+    transform 0.25s,
+    background 0.25s;
+}
+
+.ed-burger {
+  position: relative;
+}
+
+.ed-burger::before,
+.ed-burger::after {
+  content: "";
+  position: absolute;
+  left: 0;
+}
+
+.ed-burger::before {
+  top: -7px;
+}
+
+.ed-burger::after {
+  top: 7px;
+  width: 14px;
+  background: #c8402d;
+}
+
+.ed-menu[open] .ed-burger {
+  background: transparent;
+}
+
+.ed-menu[open] .ed-burger::before {
+  transform: translateY(7px) rotate(45deg);
+}
+
+.ed-menu[open] .ed-burger::after {
+  width: 22px;
+  transform: translateY(-7px) rotate(-45deg);
+}
+
+.ed-menu-panel {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 100%;
+  background: #f6f0e4;
+  border-bottom: 1px solid rgba(184, 146, 58, 0.5);
+  box-shadow: 0 16px 30px rgba(29, 26, 23, 0.12);
+  animation: ed-drop 0.25s ease-out;
+}
+
+.ed-menu-panel > a + a {
+  border-top: 1px dashed rgba(184, 146, 58, 0.4);
+}
+
+@keyframes ed-drop {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+}
+
+/* ---------- 按鈕與連結 ---------- */
+.ed-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.9rem 1.8rem;
+  font-weight: 700;
+  letter-spacing: 0.25em;
+  color: #f6f0e4;
+  background: #c8402d;
+  border-radius: 2px;
+  /* 內側一圈細線，像和紙上的框 */
+  box-shadow:
+    inset 0 0 0 3px #c8402d,
+    inset 0 0 0 4px rgba(246, 240, 228, 0.55),
+    0 6px 16px rgba(200, 64, 45, 0.25);
+  transition:
+    background 0.25s,
+    transform 0.25s,
+    box-shadow 0.25s;
+}
+
+.ed-btn:hover {
+  background: #a93322;
+  box-shadow:
+    inset 0 0 0 3px #a93322,
+    inset 0 0 0 4px rgba(246, 240, 228, 0.55),
+    0 10px 22px rgba(200, 64, 45, 0.3);
+  transform: translateY(-2px);
+}
+
+.ed-btn-outline {
+  color: #1d1a17;
+  background: transparent;
+  box-shadow:
+    inset 0 0 0 1px #1d1a17,
+    inset 0 0 0 4px #f6f0e4,
+    inset 0 0 0 5px rgba(184, 146, 58, 0.7);
+}
+
+.ed-btn-outline:hover {
+  color: #f6f0e4;
+  background: #1d1a17;
+  box-shadow:
+    inset 0 0 0 1px #1d1a17,
+    inset 0 0 0 4px #1d1a17,
+    inset 0 0 0 5px rgba(217, 184, 103, 0.8);
+}
+
+.ed-textlink {
+  font-size: 0.95rem;
+  letter-spacing: 0.12em;
+  color: #5a4a35;
+  border-bottom: 1px solid rgba(184, 146, 58, 0.7);
+  padding-bottom: 2px;
+  transition:
+    color 0.2s,
+    border-color 0.2s;
+}
+
+.ed-textlink:hover {
+  color: #c8402d;
+  border-color: #c8402d;
+}
+
+.ed-index {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 1rem 0.5rem;
+  transition: background 0.25s;
+}
+
+.ed-index:hover {
+  background: rgba(184, 146, 58, 0.1);
+}
+
+.ed-footlink {
+  transition: color 0.2s;
+}
+
+.ed-footlink:hover {
+  color: #d9b867;
+}
+
+/* ---------- Hero 插畫 ---------- */
+.ed-sun {
+  background:
+    radial-gradient(
+      circle at 35% 30%,
+      rgba(255, 255, 255, 0.25),
+      transparent 45%
+    ),
+    radial-gradient(circle, #d24a35 0%, #c8402d 60%, #a93322 100%);
+  box-shadow:
+    0 0 0 10px rgba(200, 64, 45, 0.08),
+    0 30px 60px rgba(169, 51, 34, 0.25);
+}
+
+.ed-tag {
+  padding: 1rem 0.55rem;
+  font-size: 1rem;
+  font-weight: 900;
+  letter-spacing: 0.35em;
+  color: #1d1a17;
+  background: #fbf6ea;
+  border: 1px solid #b8923a;
+  box-shadow:
+    inset 0 0 0 3px #fbf6ea,
+    inset 0 0 0 4px rgba(200, 64, 45, 0.6),
+    0 10px 20px rgba(29, 26, 23, 0.15);
+  transform: rotate(4deg);
+  transform-origin: top center;
+  animation: ed-swing 6s ease-in-out infinite;
+}
+
+@keyframes ed-swing {
+  0%,
+  100% {
+    transform: rotate(4deg);
+  }
+  50% {
+    transform: rotate(-3deg);
+  }
+}
+
+.ed-float {
+  animation: ed-float 7s ease-in-out infinite;
+}
+
+@keyframes ed-float {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(12px);
+  }
+}
+
+/* 櫻花瓣 */
+.ed-petal {
+  position: absolute;
+  top: -5%;
+  background: linear-gradient(135deg, #f8c8cf, #eea3ae);
+  border-radius: 80% 0 80% 0;
+  opacity: 0.75;
+  animation-name: ed-fall, ed-sway;
+  animation-timing-function: linear, ease-in-out;
+  animation-iteration-count: infinite, infinite;
+  animation-direction: normal, alternate;
+}
+
+@keyframes ed-fall {
+  from {
+    top: -5%;
+    rotate: 0deg;
+  }
+  to {
+    top: 105%;
+    rotate: 540deg;
+  }
+}
+
+@keyframes ed-sway {
+  from {
+    translate: -20px 0;
+  }
+  to {
+    translate: 30px 0;
+  }
+}
+
+/* 進場 */
+.ed-rise {
+  animation: ed-rise 0.9s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+
+@keyframes ed-rise {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+}
+
+/* ---------- 工具插畫面板 ---------- */
+.ed-panel {
+  background-color: #fbf6ea;
+  /* 四角金色框角 */
+  background-image:
+    linear-gradient(#b8923a, #b8923a), linear-gradient(#b8923a, #b8923a),
+    linear-gradient(#b8923a, #b8923a), linear-gradient(#b8923a, #b8923a),
+    linear-gradient(#b8923a, #b8923a), linear-gradient(#b8923a, #b8923a),
+    linear-gradient(#b8923a, #b8923a), linear-gradient(#b8923a, #b8923a);
+  background-repeat: no-repeat;
+  background-size:
+    28px 2px,
+    2px 28px,
+    28px 2px,
+    2px 28px,
+    28px 2px,
+    2px 28px,
+    28px 2px,
+    2px 28px;
+  background-position:
+    12px 12px,
+    12px 12px,
+    calc(100% - 12px) 12px,
+    calc(100% - 12px) 12px,
+    12px calc(100% - 12px),
+    12px calc(100% - 12px),
+    calc(100% - 12px) calc(100% - 12px),
+    calc(100% - 12px) calc(100% - 12px);
+  border: 1px solid rgba(184, 146, 58, 0.35);
+  box-shadow:
+    0 1px 0 #fff inset,
+    0 24px 48px -24px rgba(29, 26, 23, 0.35);
+  transition: box-shadow 0.4s;
+}
+
+.ed-panel:hover {
+  box-shadow:
+    0 1px 0 #fff inset,
+    0 30px 60px -24px rgba(169, 51, 34, 0.4);
+}
+
+.ed-watermark {
+  position: absolute;
+  left: -0.05em;
+  bottom: -0.2em;
+  font-size: clamp(9rem, 22vw, 15rem);
+  font-weight: 900;
+  line-height: 1;
+  color: rgba(184, 146, 58, 0.12);
+  pointer-events: none;
+  user-select: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ed-petal,
+  .ed-float,
+  .ed-tag,
+  .ed-rise,
+  .ed-menu-panel {
+    animation: none;
+  }
+
+  .ed-petal {
+    display: none;
+  }
+}
